@@ -1,9 +1,7 @@
 package org.example;
 
-import org.example.utils.HW1;
-import org.example.utils.HW2;
-import org.example.utils.HW3.Exchanger;
-import org.example.utils.HW3.Type;
+import org.example.HW3.Exchanger;
+import org.example.HW3.Type;
 
 public class Main {
 

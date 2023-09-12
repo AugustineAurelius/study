@@ -1,10 +1,10 @@
-package org.example.utils.HW3;
+package org.example.HW3;
 
 import lombok.Data;
-import org.example.utils.HW3.Converters.Converter;
-import org.example.utils.HW3.Converters.DollarsConverter;
-import org.example.utils.HW3.Converters.YenConverter;
-import org.example.utils.HW3.Converters.YuanConverter;
+import org.example.HW3.Converters.DollarsConverter;
+import org.example.HW3.Converters.YenConverter;
+import org.example.HW3.Converters.YuanConverter;
+import org.example.HW3.Converters.Converter;
 
 @Data
 public class Exchanger {

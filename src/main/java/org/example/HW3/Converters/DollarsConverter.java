@@ -1,6 +1,6 @@
-package org.example.utils.HW3.Converters;
+package org.example.HW3.Converters;
 
-import org.example.utils.HW3.Type;
+import org.example.HW3.Type;
 
 public class DollarsConverter implements Converter{
     @Override

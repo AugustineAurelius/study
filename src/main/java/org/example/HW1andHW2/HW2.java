@@ -1,4 +1,4 @@
-package org.example.utils;
+package org.example.HW1andHW2;
 
 import java.util.Arrays;
 
