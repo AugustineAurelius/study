@@ -9,6 +9,6 @@ public class Main {
 
         Exchanger ex = new Exchanger();
 
-        System.out.println(ex.convert(1.8967334035827186, Type.DOLLARS, Type.YUAN ));
+        System.out.println(ex.convert(15.372790161414297, Type.YUAN, Type.RUBLES ));
     }
 }

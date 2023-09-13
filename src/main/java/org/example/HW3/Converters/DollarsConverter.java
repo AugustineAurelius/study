@@ -1,16 +1,19 @@
 package org.example.HW3.Converters;
 
+import lombok.Data;
+import lombok.Getter;
 import org.example.HW3.Type;
-
+@Getter
 public class DollarsConverter implements Converter{
+    private static final double COEFFICIENT = 94.90;
     @Override
     public double convertToRub(double ue) {
-        return ue * 94.90;
+        return ue * COEFFICIENT;
     }
 
     @Override
     public double convertToCurency(double rub) {
-        return rub / 94.90;
+        return rub / COEFFICIENT;
     }
 
     @Override
