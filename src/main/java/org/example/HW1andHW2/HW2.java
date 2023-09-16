@@ -10,15 +10,29 @@ public class HW2 {
 полученного массива и вывести её в консоль.
     * */
     public static void  median (int[] arr){
-        for (int i = 0; i < arr.length; i++){
-            for (int j = 0; j + 1 < arr.length - i; j++){
-                if (arr[j + 1]<arr[j]){
+        //Четное-нечетное
+        for (int i = 0; i < arr.length; i++) {
+
+            for (int j = (i % 2 == 0) ? 0 : 1; j < arr.length - 1; j += 2) {
+                if (arr[j] > arr[j + 1]){
                     int temp = arr[j + 1];
                     arr[j + 1] = arr[j];
                     arr[j] = temp;
                 }
+
             }
         }
+
+
+//        for (int i = 0; i < arr.length; i++){
+//            for (int j = 0; j + 1 < arr.length - i; j++){
+//                if (arr[j + 1]<arr[j]){
+//                    int temp = arr[j + 1];
+//                    arr[j + 1] = arr[j];
+//                    arr[j] = temp;
+//                }
+//            }
+//        }
         System.out.println(Arrays.toString(arr));
         if (arr.length % 2 == 0){
             System.out.println((arr[arr.length / 2]+ arr[-1 + arr.length / 2]) / 2.0);

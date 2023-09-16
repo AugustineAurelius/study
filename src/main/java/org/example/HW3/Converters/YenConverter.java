@@ -2,10 +2,12 @@ package org.example.HW3.Converters;
 
 import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
 import org.example.HW3.Type;
-@Getter
-public class YenConverter implements  Converter{
 
+public class YenConverter implements  Converter{
+    @Setter
+    @Getter
     private static final double COEFFICIENT = 0.65;
     @Override
     public double convertToRub(double ue) {

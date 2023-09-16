@@ -1,10 +1,7 @@
 package org.example.HW3;
 
 import lombok.Data;
-import org.example.HW3.Converters.DollarsConverter;
-import org.example.HW3.Converters.YenConverter;
-import org.example.HW3.Converters.YuanConverter;
-import org.example.HW3.Converters.Converter;
+import org.example.HW3.Converters.*;
 
 import java.util.Optional;
 
@@ -14,45 +11,22 @@ public class Exchanger {
     private static final DollarsConverter dollar = new DollarsConverter();
     private static final YenConverter yen = new YenConverter();
     private static final YuanConverter yuan = new YuanConverter();
-    private static final Converter[] converters = new Converter[]{dollar, yen, yuan}; // Массив из конверторов, по которому мы будет выполнять поиск
+    private static final RublesConverter rub = new RublesConverter();
+    private static final Converter[] converters = new Converter[]{dollar, yen, yuan, rub}; // Массив из конверторов, по которому мы будет выполнять поиск
 
     public double convert(double value, Type input, Type output){
 
         double result = 0;
-        Converter inputConverter;//инициализируем конвертер входной валюты
-        Converter outputConverter;//инициализируем конвертер выходной валюты
 
-        if (!input.equals(Type.RUBLES) && !output.equals(Type.RUBLES)){//Если нам надо из иностранной валюты в иностранную
+        Optional<Converter> inputConverter = findConverterByType(input);//То преобразуем из Optional в Converter
+        Optional<Converter> outputConverter = findConverterByType(output);
 
-            if (findConverterByType(input).isPresent() && findConverterByType(output).isPresent()){//Если оба конвертора не null
-                inputConverter = findConverterByType(input).get();//То преобразуем из Optional в Converter
-                outputConverter = findConverterByType(output).get();
-                result = outputConverter.convertToCurency(
-                        inputConverter.convertToRub(value) //Неявно конвиртируем в рубли, а потом в нужную валюту
-                );
-            }else {
-                System.out.println("Один из конверторов  не найден");
-            }
-
-
-        } else if (input.equals(Type.RUBLES)) {//Если на надо из рублей перевести в иностранную валюту
-
-            if (findConverterByType(output).isPresent()){ // проверяем существование конвертора
-                outputConverter = findConverterByType(output).get(); // То преобразуем из Optional в Converter
-                result = outputConverter.convertToCurency(value);// пересчитываем валюту
-            }else {
-                System.out.println("Конвертор "+ output +" не найден");
-            }
-
-        } else{
-
-            if (findConverterByType(input).isPresent()){
-                inputConverter = findConverterByType(input).get();
-                result = inputConverter.convertToRub(value);
-            }else {
-                System.out.println("Конвертор "+ input +" не найден");
-            }
-
+        if (inputConverter.isPresent() && outputConverter.isPresent()){
+            Converter inp = inputConverter.get();
+            Converter out = outputConverter.get();
+            result = out.convertToCurency(inp.convertToRub(value));
+        }else {
+            System.out.println("Нет таких конверторов");
         }
 
         return result;
