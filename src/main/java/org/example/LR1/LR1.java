@@ -4,7 +4,6 @@ import org.example.LR1.utils.Calculations.ArabicCalcs;
 import org.example.LR1.utils.Calculations.RomanCalcs;
 import org.example.LR1.utils.NumberIdentifier;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
@@ -18,6 +17,7 @@ public class LR1 {
         String temp = "";//инициализируем пустую строку для считывания операций
 
         while (!temp.equals("exit")){//условия выхода из программы
+            System.out.println("Введите арифметическую операцию");
             temp = scanner.nextLine();
             if (NumberIdentifier.isBad(temp)){
                 System.out.println("Неверный формат чисел");
