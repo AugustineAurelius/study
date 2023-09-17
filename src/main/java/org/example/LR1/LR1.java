@@ -10,6 +10,7 @@ import java.util.*;
 
 public class LR1 {
     public static void main(String[] args) throws IOException {
+        NumberIdentifier numberIdentifier = new NumberIdentifier();
         Scanner scanner = new Scanner(new InputStreamReader(System.in));
 
         String temp = "";//инициализируем пустую строку для считывания операций
@@ -17,14 +18,14 @@ public class LR1 {
         while (!temp.equals("exit")){//условия выхода из программы
             System.out.println("Введите арифметическую операцию");
             temp = scanner.nextLine();
-            if (NumberIdentifier.isBad(temp)){
+            if (numberIdentifier.isBad(temp)){
                 System.out.println("Неверный формат чисел");
-            }else if (NumberIdentifier.isArabicNumber(temp)){
+            }else if (numberIdentifier.isArabicNumber(temp)){
                 ArabicCalcs arabicCalcs = new ArabicCalcs();
                 arabicCalcs.calculate(temp);
-            }else if (NumberIdentifier.isRomanNumber(temp)) {
+            }else if (numberIdentifier.isRomanNumber(temp)) {
                 RomanCalcs romanCalcs = new RomanCalcs();
-                romanCalcs.calculate(temp);
+                romanCalcs.calculate(temp.toUpperCase());
             }
         }
         System.out.println("Пока пока");

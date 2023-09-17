@@ -1,5 +1,7 @@
 package org.example.LR1.utils;
 
+import java.util.Arrays;
+
 public class NumberIdentifier {
 
     /**
@@ -7,7 +9,7 @@ public class NumberIdentifier {
      * @return
      * Так как числа меньше 10, то проверяем первый и третий символ, на то являются ли они числами
      */
-    public static boolean isArabicNumber(String number){
+    public boolean isArabicNumber(String number){
         return Character.isDigit(number.toCharArray()[0]) && Character.isDigit(number.toCharArray()[number.length()-1]);
     }
 
@@ -16,7 +18,7 @@ public class NumberIdentifier {
      * @return
      * Операция обратная первой
      */
-    public static boolean isRomanNumber(String number){
+    public boolean isRomanNumber(String number){
         return !isArabicNumber(number);
     }
 
@@ -26,10 +28,11 @@ public class NumberIdentifier {
      * @param number
      * @return
      */
-    public static boolean isBad(String number){
+    public boolean isBad(String number){
         boolean right = Character.isDigit(number.toCharArray()[0]) && Character.isLetter(number.toCharArray()[number.length()-1]);
         boolean reverse = Character.isLetter(number.toCharArray()[0]) && Character.isDigit(number.toCharArray()[number.length()-1]);
         return right || reverse;
     }
+
 
 }

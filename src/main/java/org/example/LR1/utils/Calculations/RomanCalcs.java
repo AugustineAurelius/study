@@ -8,28 +8,53 @@ public class RomanCalcs extends Calculations{
 
     @Override
     protected void addition(String num1, String num2) {
-        System.out.println(intToRoman(romanToInt(num1) + romanToInt(num2)));
+        if (moreThatTen(num1, num2)){
+            System.out.println("Неверный формат чисел");
+        }else {
+            System.out.println(intToRoman(romanToInt(num1) + romanToInt(num2)));
+        }
     }
 
     @Override
     protected void subtraction(String num1, String num2) {
-        int number1 = romanToInt(num1);
-        int number2 = romanToInt(num2);
-        if (number1 < number2){
-            System.out.println("Неположительный результат");
+        if (moreThatTen(num1, num2)){
+            System.out.println("Неверный формат чисел");
         }else {
-            System.out.println(intToRoman(number1 - number2));
+            int number1 = romanToInt(num1);
+            int number2 = romanToInt(num2);
+            if (number1 < number2){
+                System.out.println("Неположительный результат");
+            }else {
+                System.out.println(intToRoman(number1 - number2));
+            }
         }
     }
 
     @Override
     protected void multiplication(String num1, String num2) {
-        System.out.println(intToRoman(romanToInt(num1) * romanToInt(num2)));
+        if (moreThatTen(num1, num2)){
+            System.out.println("Неверный формат чисел");
+        }else {
+            System.out.println(intToRoman(romanToInt(num1) * romanToInt(num2)));
+        }
     }
 
     @Override
     protected void division(String num1, String num2) {
-        System.out.println(intToRoman(romanToInt(num1) / romanToInt(num2)));
+        if (moreThatTen(num1, num2)){
+            System.out.println("Неверный формат чисел");
+        }else {
+            System.out.println(intToRoman(romanToInt(num1) / romanToInt(num2)));
+        }
+    }
+
+    @Override
+    protected boolean moreThatTen(String num1, String num2) {
+        boolean result = false;
+        if (romanToInt(num1) > 10 || romanToInt(num2) > 10){
+            result = true;
+        }
+        return result;
     }
 
     private int romanToInt(String s) {
