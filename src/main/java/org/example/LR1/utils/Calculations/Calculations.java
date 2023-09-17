@@ -7,7 +7,6 @@ public abstract class Calculations {
     protected abstract void  division(String num1, String num2);
 
     /**
-     *
      * Определяет вид операции которую необходимо сделать
      * @param operation
      */

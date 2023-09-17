@@ -8,7 +8,6 @@ public class NumberIdentifier {
      * Так как числа меньше 10, то проверяем первый и третий символ, на то являются ли они числами
      */
     public static boolean isArabicNumber(String number){
-
         return Character.isDigit(number.toCharArray()[0]) && Character.isDigit(number.toCharArray()[number.length()-1]);
     }
 
