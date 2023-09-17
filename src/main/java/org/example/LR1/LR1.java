@@ -9,8 +9,6 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class LR1 {
-    static ArabicCalcs arabicCalcs = new ArabicCalcs();
-    static RomanCalcs romanCalcs = new RomanCalcs();
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(new InputStreamReader(System.in));
 
@@ -22,8 +20,10 @@ public class LR1 {
             if (NumberIdentifier.isBad(temp)){
                 System.out.println("Неверный формат чисел");
             }else if (NumberIdentifier.isArabicNumber(temp)){
+                ArabicCalcs arabicCalcs = new ArabicCalcs();
                 arabicCalcs.calculate(temp);
             }else if (NumberIdentifier.isRomanNumber(temp)) {
+                RomanCalcs romanCalcs = new RomanCalcs();
                 romanCalcs.calculate(temp);
             }
         }

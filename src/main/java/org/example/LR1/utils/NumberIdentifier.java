@@ -2,9 +2,6 @@ package org.example.LR1.utils;
 
 public class NumberIdentifier {
 
-    static String rom = "IVXLCDM";
-    static String ints = "1234567890";
-
     /**
      * @param number
      * @return
@@ -12,7 +9,7 @@ public class NumberIdentifier {
      */
     public static boolean isArabicNumber(String number){
 
-        return Character.isDigit(number.toCharArray()[0]) && Character.isDigit(number.toCharArray()[2]);
+        return Character.isDigit(number.toCharArray()[0]) && Character.isDigit(number.toCharArray()[number.length()-1]);
     }
 
     /**
