@@ -43,10 +43,6 @@ public class ArabicCalcs extends Calculations {
 
     @Override
     protected boolean moreThatTen(String num1, String num2) {
-        boolean result = false;
-        if (Integer.parseInt(num1) > 10 || Integer.parseInt(num2) > 10){
-            result = true;
-        }
-        return result;
+        return Integer.parseInt(num1) > 10 || Integer.parseInt(num2) > 10;
     }
 }

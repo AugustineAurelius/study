@@ -29,8 +29,8 @@ public class NumberIdentifier {
      * @return
      */
     public boolean isBad(String number){
-        boolean right = Character.isDigit(number.toCharArray()[0]) && Character.isLetter(number.toCharArray()[number.length()-1]);
-        boolean reverse = Character.isLetter(number.toCharArray()[0]) && Character.isDigit(number.toCharArray()[number.length()-1]);
+        boolean right = Character.isDigit(number.toCharArray()[0]) && !Character.isDigit(number.toCharArray()[number.length()-1]);
+        boolean reverse = !Character.isDigit(number.toCharArray()[0]) && Character.isDigit(number.toCharArray()[number.length()-1]);
         return right || reverse;
     }
 

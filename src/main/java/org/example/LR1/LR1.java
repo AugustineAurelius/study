@@ -28,6 +28,7 @@ public class LR1 {
                 romanCalcs.calculate(temp.toUpperCase());
             }
         }
+        scanner.close();
         System.out.println("Пока пока");
 
     }
