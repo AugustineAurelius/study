@@ -13,7 +13,7 @@ public class exceptionMain {
 
 
         try {
-            stringDataValidator.validate("ads", "");
+            stringDataValidator.validate("ads", null);
         }catch (EmptyDataException e){
             System.err.println(Arrays.toString(e.getStackTrace()));
             System.err.println(e.getMessage());

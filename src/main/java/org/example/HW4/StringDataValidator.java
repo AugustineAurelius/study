@@ -8,7 +8,7 @@ public class StringDataValidator {
 
     public boolean validate (String first, String second){
 
-        if (first.isEmpty() || second.isEmpty() || first == null || second == null){
+        if (first == null || second == null || first.isEmpty() || second.isEmpty()  ){
             throw new EmptyDataException("Одна или обе строки пустые или равны null");
         }
         if (!first.matches("^[a-zA-Z0-9]+$") || !second.matches("^[a-zA-Z0-9]+$")){
