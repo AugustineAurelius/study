@@ -1,9 +1,10 @@
 package org.example.LR1.utils.Calculations;
 
-public class ArabicCalcs extends Calculations {
+public class ArabicCalcs extends Calculations implements inter {
 
     @Override
     protected void addition(String num1, String num2) {
+
         if (moreThatTen(num1, num2)){
             System.out.println("Неверный формат чисел");
         }else {
