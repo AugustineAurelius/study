@@ -25,25 +25,36 @@ public class Tree<T extends Comparable<T>> {
         root = removeNode(root, value);
     }
 
-    private Node removeNode(Node node, T value) {
-        if (node == null) {
+    private Node removeNode(Node currentNode, T value) {
+        if (currentNode == null) {
             return null;
         }
-        int res = value.compareTo(node.getValue());
-        if (res < 0) {
-            node.setLeftLeaf(removeNode(node.getLeftLeaf(), value));
-        } else if (res > 0) {
-            node.setRightLeaf(removeNode(node.getRightLeaf(), value));
+
+        if (value.compareTo(currentNode.value) < 0) {
+            currentNode.setLeftLeaf(removeNode(currentNode.getLeftLeaf(), value));
+        } else if (value.compareTo(currentNode.value) > 0) {
+            currentNode.setRightLeaf(removeNode(currentNode.getRightLeaf(), value));
         } else {
-            if (node.getLeftLeaf() == null) {
-                return node.getRightLeaf();
-            } else if (node.getRightLeaf() == null) {
-                return node.getLeftLeaf();
+            if (currentNode.getLeftLeaf() == null) {
+                return currentNode.getRightLeaf();
+            } else if (currentNode.getRightLeaf() == null) {
+                return currentNode.getLeftLeaf();
             }
 
+            currentNode.value = findMinValue(currentNode.getRightLeaf());
+            currentNode.setRightLeaf(removeNode(currentNode.getRightLeaf(), currentNode.value));
         }
 
-        return node;
+        return currentNode;
+    }
+
+    private T findMinValue(Node currentNode) {
+        T minValue = currentNode.value;
+        while (currentNode.getLeftLeaf() != null) {
+            minValue = currentNode.getLeftLeaf().value;
+            currentNode = currentNode.getLeftLeaf();
+        }
+        return minValue;
     }
 
     private void addNode(Node node, T value){
