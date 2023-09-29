@@ -11,9 +11,8 @@ public class exceptionMain {
     public static void main(String[] args) {
         StringDataValidator stringDataValidator = new StringDataValidator();
 
-
         try {
-            stringDataValidator.validate("ads", null);
+            System.out.println(stringDataValidator.validate("фыв", ""));
         }catch (EmptyDataException e){
             System.err.println(Arrays.toString(e.getStackTrace()));
             System.err.println(e.getMessage());
