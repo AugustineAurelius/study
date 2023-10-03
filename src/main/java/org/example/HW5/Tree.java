@@ -4,11 +4,12 @@ import lombok.Data;
 import lombok.Getter;
 
 public class Tree<T extends Comparable<T>> {
-
     private Node root;
-    @Getter
-    private int size;
 
+    private int size;
+    public int size(){
+        return this.size;
+    }
     public T add(T value){
         if (this.root == null){
             this.root = new Node(value);
