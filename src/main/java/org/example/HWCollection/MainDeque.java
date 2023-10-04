@@ -19,15 +19,15 @@ public class MainDeque {
         }
         container.add(2);
         container.add(2);
-        container.add(2);
+
         container.add(3);
         container.printDeque();
+        System.out.println();
+        Iterator<Integer> iterator = container.iterator();
 
-        System.out.println(container.contains(3));
-        container.removeFirstOccurrence(3);
-
-        System.out.println(container.contains(3));
-        container.printDeque();
+        while (iterator.hasNext()){
+            System.out.println(iterator.next());
+        }
 
 
 

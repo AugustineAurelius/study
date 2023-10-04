@@ -51,7 +51,9 @@ public class TripletDeque<E> implements Deque<E> {
         }else if (last == first){
             this.last.addFirstCont(e);
             this.size++;
-        }else{
+        } else if (size == maxSize) {
+            throw new IllegalArgumentException("Превышен максимальный лимит по емкости");
+        } else{
             this.last.addLast(e);
             this.size++;
         }
@@ -66,6 +68,8 @@ public class TripletDeque<E> implements Deque<E> {
             addContainerNext();
             this.first.addFirst(e);
             this.size++;
+        } else if (size == maxSize) {
+            throw new IllegalArgumentException("Превышен максимальный лимит по емкости");
         }else{
             this.first.addFirst(e);
             this.size++;
@@ -204,12 +208,12 @@ public class TripletDeque<E> implements Deque<E> {
     public Iterator<E> iterator() {
         return new Iterator<E>() {
             private Container<E> currentContainer = last;
-            private int currentIndex = 0;
+            private int currentIndex = currentContainer.findLastToRemove();
 
             @Override
             public boolean hasNext() {
                 return currentContainer != null &&
-                        (currentIndex < currentContainer.getCapacity() ||
+                        (currentIndex < currentContainer.getSize() ||
                                 currentContainer.getNext() != null);
             }
 
