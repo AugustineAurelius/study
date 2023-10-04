@@ -17,12 +17,12 @@ public class MainDeque {
         for (int i = 1; i <= 8; i++){
             container.addFirst(i);
         }
-        container.addLast(2);
-        container.addLast(2);
-        container.addLast(2);
-        container.addLast(3);
+        container.add(2);
+        container.add(2);
+        container.add(2);
+        container.add(3);
         container.printDeque();
-        System.out.println();
+
         System.out.println(container.contains(3));
         container.removeFirstOccurrence(3);
 

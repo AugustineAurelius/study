@@ -8,7 +8,6 @@ import java.util.*;
 public class TripletDeque<E> implements Deque<E> {
     private int maxSize = 1000;
     private int size = 0;
-
     private Container<E> first;
     private Container<E> last;
     TripletDeque(){
@@ -45,21 +44,6 @@ public class TripletDeque<E> implements Deque<E> {
     public void addFirst(E e) {
         if (e == null){
             throw new NullPointerException();
-        }else if (first.isFull()){
-            addContainerNext();
-            this.first.addFirst(e);
-            this.size++;
-        }else{
-            this.first.addFirst(e);
-            this.size++;
-        }
-
-    }
-
-    @Override
-    public void addLast(E e) {
-        if (e == null){
-            throw new NullPointerException();
         }else if (last.isFull()){
             addContainerPrev();
             this.last.addLast(e);
@@ -71,6 +55,22 @@ public class TripletDeque<E> implements Deque<E> {
             this.last.addLast(e);
             this.size++;
         }
+
+    }
+
+    @Override
+    public void addLast(E e) {
+        if (e == null){
+            throw new NullPointerException();
+        }else if (first.isFull()){
+            addContainerNext();
+            this.first.addFirst(e);
+            this.size++;
+        }else{
+            this.first.addFirst(e);
+            this.size++;
+        }
+
     }
 
     @Override
@@ -96,9 +96,9 @@ public class TripletDeque<E> implements Deque<E> {
         if (size == 0){
             throw new NoSuchElementException();
         }
-        E elem = first.removeFirst();
-        if (first.isEmpty()){
-            first = first.getPrevious();
+        E elem = last.removeLast();
+        if (last.isEmpty()){
+            last = last.getNext();
         }
         size--;
         return elem;
@@ -109,12 +109,13 @@ public class TripletDeque<E> implements Deque<E> {
         if (size == 0){
             throw new NoSuchElementException();
         }
-        E elem = last.removeLast();
-        if (last.isEmpty()){
-            last = last.getNext();
+        E elem = first.removeFirst();
+        if (first.isEmpty()){
+            first = first.getPrevious();
         }
         size--;
         return elem;
+
     }
 
     @Override
@@ -138,7 +139,7 @@ public class TripletDeque<E> implements Deque<E> {
         if (size == 0){
             throw new NoSuchElementException();
         }
-        E elem = (E) first.getElements()[first.findFirstToRemove()];
+        E elem = (E) last.getElements()[last.findLastToRemove()];
 
         return elem;
     }
@@ -148,9 +149,10 @@ public class TripletDeque<E> implements Deque<E> {
         if (size == 0){
             throw new NoSuchElementException();
         }
-        E elem = (E) last.getElements()[last.findLastToRemove()];
+        E elem = (E) first.getElements()[first.findFirstToRemove()];
 
         return elem;
+
     }
 
     @Override
@@ -164,7 +166,7 @@ public class TripletDeque<E> implements Deque<E> {
     @Override
     public E peekLast() {
         if (size != 0){
-            return getFirst();
+            return getLast();
         }
         return null;
     }
@@ -184,15 +186,15 @@ public class TripletDeque<E> implements Deque<E> {
                 }
                 tempArray.add(tempEl);
             }
-            removeLast();
+            removeFirst();
         }
-        size--;
+
         Container<E> newContainer = new Container<>();
         first = newContainer;
         last = newContainer;
         if (flg){
             for(E el : tempArray){
-                addFirst(el);
+                addLast(el);
             }
         }
 
@@ -237,7 +239,7 @@ public class TripletDeque<E> implements Deque<E> {
             E tempEl = iterator.next();
             if (tempEl != null){
                 tempArray.add(tempEl);
-                removeLast();
+                removeFirst();
             }
         }
         Container<E> newContainer = new Container<>();
@@ -248,7 +250,7 @@ public class TripletDeque<E> implements Deque<E> {
         }
         if (flg){
             for(E el : tempArray){
-                addFirst(el);
+                addLast(el);
             }
         }
 
@@ -306,20 +308,6 @@ public class TripletDeque<E> implements Deque<E> {
         return true;
     }
 
-    @Override
-    public boolean removeAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override
-    public boolean retainAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override
-    public void clear() {
-
-    }
 
     @Override
     public void push(E e) {
@@ -370,7 +358,25 @@ public class TripletDeque<E> implements Deque<E> {
     }
 
 
+    @Override
+    public Iterator<E> descendingIterator() {
+        throw new UnsupportedOperationException();
+    }
 
+    @Override
+    public boolean removeAll(Collection<?> c) {
+        return false;
+    }
+
+    @Override
+    public boolean retainAll(Collection<?> c) {
+        return false;
+    }
+
+    @Override
+    public void clear() {
+
+    }
     @Override
     public Object[] toArray() {
         return new Object[0];
@@ -378,12 +384,6 @@ public class TripletDeque<E> implements Deque<E> {
 
     @Override
     public <T> T[] toArray(T[] a) {
-        return null;
-    }
-
-
-    @Override
-    public Iterator<E> descendingIterator() {
         return null;
     }
 
