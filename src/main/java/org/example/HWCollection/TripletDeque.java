@@ -238,10 +238,10 @@ public class TripletDeque<E> implements Deque<E> {
         Iterator<E> iterator = iterator();
         while (iterator.hasNext()){
             E tempEl = iterator.next();
-            if (tempEl != null){
-                tempArray.add(tempEl);
-                removeFirst();
-            }
+
+            tempArray.add(tempEl);
+            removeFirst();
+
         }
         Container<E> newContainer = new Container<>();
         first = newContainer;
