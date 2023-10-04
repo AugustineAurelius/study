@@ -14,13 +14,10 @@ public class MainDeque {
 
 //        Container<Integer> container = new Container<>();
         TripletDeque<Integer> container = new TripletDeque<>();
-        for (int i = 1; i <= 8; i++){
-            container.addFirst(i);
+        for (int i = 0; i < 7; i++){
+            container.addLast(i);
         }
-        container.add(2);
-        container.add(2);
 
-        container.add(3);
         container.printDeque();
         System.out.println();
         Iterator<Integer> iterator = container.iterator();

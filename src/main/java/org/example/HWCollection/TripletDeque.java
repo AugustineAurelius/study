@@ -185,9 +185,6 @@ public class TripletDeque<E> implements Deque<E> {
             if (tempEl == o && !flg){
                 flg = true;
             }else {
-                if (tempEl == null){
-                    continue;
-                }
                 tempArray.add(tempEl);
             }
             removeFirst();
@@ -213,8 +210,8 @@ public class TripletDeque<E> implements Deque<E> {
             @Override
             public boolean hasNext() {
                 return currentContainer != null &&
-                        (currentIndex < currentContainer.getSize() ||
-                                currentContainer.getNext() != null);
+                        (currentIndex <= currentContainer.findFirstToRemove() ||
+                                currentContainer.getNext() != null) ;
             }
 
             @Override

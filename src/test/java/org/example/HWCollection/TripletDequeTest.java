@@ -159,8 +159,10 @@ public class TripletDequeTest extends TestCase {
             tripletDeque.addLast(i);
         }
         tripletDeque.printDeque();
+        System.out.println();
         Assertions.assertEquals(10, tripletDeque.size());
         tripletDeque.removeFirstOccurrence(5);
+        tripletDeque.printDeque();
         Assertions.assertEquals(9, tripletDeque.size());
         Assertions.assertEquals(0, tripletDeque.getFirst());
         Assertions.assertEquals(9, tripletDeque.getLast());
