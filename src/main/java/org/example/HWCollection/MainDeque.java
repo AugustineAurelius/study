@@ -20,6 +20,8 @@ public class MainDeque {
 
         container.printDeque();
         System.out.println();
+
+
         Iterator<Integer> iterator = container.iterator();
 
         while (iterator.hasNext()){

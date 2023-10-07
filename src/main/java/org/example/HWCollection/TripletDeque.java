@@ -5,7 +5,7 @@ import lombok.Setter;
 
 import java.util.*;
 
-public class TripletDeque<E> implements Deque<E> {
+public class TripletDeque<E> implements Deque<E> , Containerable {
     private int maxSize = 1000;
     private int size = 0;
     private Container<E> first;
@@ -51,7 +51,7 @@ public class TripletDeque<E> implements Deque<E> {
         }else if (last == first){
             this.last.addFirstCont(e);
             this.size++;
-        } else if (size == maxSize) {
+        }else if (size == maxSize) {
             throw new IllegalArgumentException("Превышен максимальный лимит по емкости");
         } else{
             this.last.addLast(e);
@@ -102,7 +102,9 @@ public class TripletDeque<E> implements Deque<E> {
         }
         E elem = last.removeLast();
         if (last.isEmpty()){
-            last = last.getNext();
+            if (last.getNext() != null){
+                last = last.getNext();
+            }
         }
         size--;
         return elem;
@@ -115,7 +117,9 @@ public class TripletDeque<E> implements Deque<E> {
         }
         E elem = first.removeFirst();
         if (first.isEmpty()){
-            first = first.getPrevious();
+            if (last.getNext() != null){
+                first = first.getPrevious();
+            }
         }
         size--;
         return elem;
@@ -182,17 +186,16 @@ public class TripletDeque<E> implements Deque<E> {
         Iterator<E> iterator = iterator();
         while (iterator.hasNext()){
             E tempEl = iterator.next();
-            if (tempEl == o && !flg){
+            if (tempEl.equals((E) o) && !flg){
                 flg = true;
             }else {
                 tempArray.add(tempEl);
             }
             removeFirst();
+
         }
 
-        Container<E> newContainer = new Container<>();
-        first = newContainer;
-        last = newContainer;
+        last = first;
         if (flg){
             for(E el : tempArray){
                 addLast(el);
@@ -204,28 +207,25 @@ public class TripletDeque<E> implements Deque<E> {
     @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
+            public int summaryIdn = size();
             private Container<E> currentContainer = last;
             private int currentIndex = currentContainer.findLastToRemove();
 
             @Override
             public boolean hasNext() {
-                return currentContainer != null &&
-                        (currentIndex <= currentContainer.findFirstToRemove() ||
-                                currentContainer.getNext() != null) ;
+                return summaryIdn != 0;
             }
 
             @Override
             public E next() {
-
-
                 if (currentIndex == currentContainer.getCapacity()) {
                     currentContainer = currentContainer.getNext();
                     currentIndex = 0;
                 }
-                if (currentContainer == null || currentIndex >= currentContainer.getCapacity()) {
+                if (currentContainer.getElements()[currentIndex] == null) {
                     throw new NoSuchElementException();
                 }
-
+                summaryIdn--;
                 return (E) currentContainer.getElements()[currentIndex++];
             }
         };
@@ -340,7 +340,8 @@ public class TripletDeque<E> implements Deque<E> {
         boolean flg = false;
         Iterator<E> iterator = iterator();
         while (iterator.hasNext()){
-            if(iterator.next() == o){
+            E temp = iterator.next();
+            if(temp.equals(o)){
                 flg = true;
                 break;
             }
@@ -376,6 +377,10 @@ public class TripletDeque<E> implements Deque<E> {
 
     @Override
     public void clear() {
+        Container<E> newContainer = new Container<>();
+        first = newContainer;
+        last = newContainer;
+        size = 0;
 
     }
     @Override
@@ -395,6 +400,23 @@ public class TripletDeque<E> implements Deque<E> {
             System.out.print(Arrays.toString(temp.getElements()));
             temp = temp.getNext();
         }
+    }
+
+    @Override
+    public Object[] getContainerByIndex(int cIndex) {
+        Container<E> currentContainer = last;
+
+        int contInd = 0;
+        if (cIndex >= size / last.size){
+            return null;
+        }
+
+        // индекс проходит к двум и поэтому не получает последний индекс
+        while (contInd != cIndex ){
+            currentContainer = last.getNext();
+            contInd++;
+        }
+        return currentContainer == null ? null : currentContainer.getElements();
     }
 
     static class Container<E> {
