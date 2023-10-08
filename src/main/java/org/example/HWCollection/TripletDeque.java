@@ -405,15 +405,9 @@ public class TripletDeque<E> implements Deque<E> , Containerable {
     @Override
     public Object[] getContainerByIndex(int cIndex) {
         Container<E> currentContainer = last;
-
         int contInd = 0;
-        if (cIndex >= size / last.size){
-            return null;
-        }
-
-        // индекс проходит к двум и поэтому не получает последний индекс
-        while (contInd != cIndex ){
-            currentContainer = last.getNext();
+        while (contInd < cIndex  ){
+            currentContainer = currentContainer.getNext();
             contInd++;
         }
         return currentContainer == null ? null : currentContainer.getElements();
@@ -483,11 +477,11 @@ public class TripletDeque<E> implements Deque<E> , Containerable {
 
         public void addFirst(E e){
             if (isFull()){
-            System.out.println("Net mesta");
-        }else {
+                throw new IndexOutOfBoundsException("Container is full");
+            }else {
 
-            this.elements[findFirstInd()] = e;
-            this.size++;
+                this.elements[findFirstInd()] = e;
+                this.size++;
             }
         }
 
@@ -495,7 +489,7 @@ public class TripletDeque<E> implements Deque<E> , Containerable {
 
         public void addLast(E e){
             if (isFull()){
-                System.out.println("Net mesta");
+                throw new IndexOutOfBoundsException("Container is full");
             }else {
                 this.elements[findLastInd()] = e;
                 this.size++;
@@ -544,7 +538,7 @@ public class TripletDeque<E> implements Deque<E> , Containerable {
 
         public void addFirstCont(E e) {
             if (isFull()){
-                System.out.println("Net mesta");
+                throw new IndexOutOfBoundsException("Container is full");
             }else {
                 moveElems();
                 this.elements[0] = e;
