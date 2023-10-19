@@ -255,7 +255,6 @@ public class TripletTests {
         tQueue.remove("2");
         Assertions.assertTrue(cntr[0] == null || cntr[cntr.length-1] == null);
 
-
         for (int i=1; i < cntr.length-2; i++){
             assertNotNull(cntr[i]);
         }
@@ -282,7 +281,7 @@ public class TripletTests {
         cntr1 = cQueue.getContainerByIndex(1);
         cntr2 = cQueue.getContainerByIndex(2);
 
-        Assertions.assertTrue(cntr != null && cntr1 != null && cntr2 == null);
+        Assertions.assertTrue(cntr!=null && cntr1 != null && cntr2 ==null);
 
     }
 
