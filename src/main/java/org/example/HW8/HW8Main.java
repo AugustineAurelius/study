@@ -20,38 +20,39 @@ public class HW8Main {
         System.out.println(streamers.stream()
                 .filter(s -> s.getPlatforms().stream()
                         .noneMatch(Platform::isRoscomnadzored)
-                        )
+                )
                 .min(Comparator.comparingInt(Streamer::getAge)).get());
 
 //    3) Получить Map<Name(String), PlatfromName(String)> для всех стримеров
         System.out.println(
                 streamers.stream().collect(Collectors
                         .toMap(Streamer::getName, s -> s.getPlatforms().stream().map(Platform::getName).toList().toString())
-        ));
+                ));
 
 //    4) Найти стримера с наименишм количествои подписчиков, который работает на заблокированной платформе
         System.out.println(
                 streamers.stream().filter(
-                        s -> s.getPlatforms().stream().noneMatch(Platform::isRoscomnadzored)
-                ).min(Comparator.comparingDouble(Streamer::getSubscribers))
+                                s -> s.getPlatforms().stream().noneMatch(Platform::isRoscomnadzored)
+                        ).min(Comparator.comparingDouble(Streamer::getSubscribers))
                         .get()
         );
 
 //    5) Вычислить средний возраст стримеров на платформе twitch
         System.out.println(
-                streamers.stream().filter(s -> s.getPlatforms().contains(twitch)).mapToInt(Streamer::getAge).average()
+                streamers.stream().filter(s -> s.getPlatforms().contains(twitch)).mapToInt(Streamer::getAge).average().getAsDouble()
         );
 //    6) Найти любого стримера на youtube с подсчиками > 10k. Если его нет - бросить NoSuchElementException
         System.out.println(
                 streamers.stream().filter(
                         s -> s.getSubscribers() > 10000 && s.getPlatforms().contains(youTube)
-                ).findAny().orElseThrow((Supplier<Throwable>) NoSuchFieldException::new)
+                ).findAny().orElseThrow(NoSuchFieldException::new)
         );
 //    7) *Получить из листа стримеров лист платформ (не должны повторяться платформы в выодном листе)
         System.out.println(
                 streamers.stream().flatMap(s -> s.getPlatforms().stream()).distinct().toList()
         );
     }
+
     static Platform twitch = new Platform("Twitch", false);
     static Platform utv = new Platform("UTV", true);
     static Platform youTube = new Platform("YouTube", false);
